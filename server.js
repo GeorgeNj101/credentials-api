@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import pool from "./src/db.js";
+import authRoutes from "./src/routes/authRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Credentials API is running...");
 });
+
+// Routes
+app.use("/api/auth", authRoutes);
 
 // Database test
 pool.query("SELECT NOW()", (err, result) => {
